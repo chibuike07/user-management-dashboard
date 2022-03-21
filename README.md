@@ -1,3 +1,15 @@
+# User management dashboard
+
+This is a Dashboard that expects to see all the users task progress in the specified month
+
+# Deployed link
+
+This Project is hosted on [GitHub Page](https://chibuike07.github.io/user-management-dashboard/);
+
+# Repository [GitHub]
+
+This project repository is located at (https://github.com/chibuike07/user-management-dashboard)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

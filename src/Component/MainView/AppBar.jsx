@@ -8,7 +8,6 @@ import styles from "./Styles/TaskUser.module.css";
 const AppBar = () => {
   const { Totalprogress } = styles;
   const [{ totalProgress }] = useContext(UserContext);
-
   return (
     <nav className="mt-5 container-fluid d-flex justify-content-between">
       <div>

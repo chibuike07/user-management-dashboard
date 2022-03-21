@@ -2,14 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import CustomList from "../../Common/CustomList";
 import { menuItems } from "../util/helpers";
 import ListItemStyle from "./Styles/ListItemStyle.module.css";
-import { useSearchParams } from "react-router-dom";
 import { UserContext } from "../../Contexts/Context";
 
 const ListItems = () => {
   const { listClickColor } = ListItemStyle;
   const [prevClicked, setPrevClick] = useState(0);
   const [clickedListIdx, setClickedListIdx] = useState(0);
-  // let [searchParams, setSearchParams] = useSearchParams();
   const [, setState] = useContext(UserContext);
 
   const lists = useRef();
@@ -17,7 +15,6 @@ const ListItems = () => {
     setClickedListIdx(idx);
     setPrevClick((prev) => prev + 1);
     setState((data) => ({ ...data, tag: innerText && innerText }));
-    console.log("innerText :>> ", innerText);
   };
 
   useEffect(() => {
