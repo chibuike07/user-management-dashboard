@@ -1,7 +1,7 @@
 import { faDotCircle, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../Contexts/Context";
 import { taskUsers, colors, workItems } from "../util/helpers";
 import taskUserStyles from "./Styles/TaskUser.module.css";
 
@@ -9,7 +9,7 @@ const TaskUser = () => {
   const { _progress } = taskUserStyles;
   const [data, setData] = useState([]);
   const [taskProgress, setTaskProgress] = useState(0);
-  const [_, setParams] = useSearchParams();
+  const [, setTotalProgress] = useContext(UserContext);
   useEffect(() => {
     let timeOut = window.setInterval(() => {
       taskUsers.forEach((value, i) => {
@@ -18,11 +18,9 @@ const TaskUser = () => {
           setTaskProgress((prev) => prev + 10);
           return taskUsers.splice(i, 1, value);
         } else {
-          return false;
+          return (value.progress = 100);
         }
       });
-
-      // setParams({ totalProgress });
     }, 10000);
 
     const fetchData = () => {
@@ -31,19 +29,17 @@ const TaskUser = () => {
 
     fetchData();
     const handleTotalProgress = () => {
-      // console.log("data :>> ", data);
       let totalProgress =
         data?.length &&
         data.reduce((store, curVal) => store + curVal?.progress, 0);
-      setParams({ totalProgress });
-      // console.log("totalProgress :>> ", (totalProgress * 10) / 100);
+      setTotalProgress((data) => ({ ...data, totalProgress }));
     };
 
     handleTotalProgress();
     return () => {
       clearInterval(timeOut);
     };
-  }, [taskProgress, data, setParams]);
+  }, [taskProgress, data, setTotalProgress]);
   return (
     <figure className="mt-3 w-100" style={{ minWidth: 220 }}>
       {data?.length &&
@@ -54,9 +50,12 @@ const TaskUser = () => {
           const randomItems = Math.floor(Math.random() * workItems.length);
 
           return (
-            <div className="w-100 d-flex" style={{ backgroundColor: "yell" }}>
+            <div
+              className="w-100 d-flex"
+              style={{ backgroundColor: "yell" }}
+              key={idx}
+            >
               <div
-                key={idx}
                 className="card w-25 mb-2 justify-content-center"
                 style={{ height: "10vh", borderRadius: "15px" }}
               >

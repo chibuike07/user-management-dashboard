@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { taskUsers } from "../util/helpers";
-import { useSearchParams } from "react-router-dom";
+import { UserContext } from "../../Contexts/Context";
+import styles from "./Styles/TaskUser.module.css";
 
 const AppBar = () => {
-  const [params] = useSearchParams();
-  let totalProgress = params.get("totalProgress");
-
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    // let totalProgress =
-    //   taskUsers &&
-    //   taskUsers.reduce((store, curValue) => store + curValue?.progress, 0);
-    setProgress(totalProgress);
-  }, [totalProgress]);
+  const { Totalprogress } = styles;
+  const [{ totalProgress }] = useContext(UserContext);
 
   return (
     <nav className="mt-5 container-fluid d-flex justify-content-between">
       <div>
         <h2>GSE Banking app</h2>
-        <p>
-          <span>{(progress * taskUsers?.length) / 100}</span>{" "}
-          <progress
-            value={(progress * taskUsers?.length) / 100}
-            max={100}
-          ></progress>
-        </p>
+        <div className="d-flex align-items-center">
+          <span className="me-2">
+            {(totalProgress * taskUsers?.length) / 100}%
+          </span>{" "}
+          <div className={Totalprogress}>
+            <div
+              style={{ width: `${(totalProgress * taskUsers?.length) / 100}%` }}
+            ></div>
+          </div>
+        </div>
       </div>
 
       <div

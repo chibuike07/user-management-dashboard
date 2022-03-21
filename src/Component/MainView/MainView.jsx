@@ -7,7 +7,7 @@ import TaskUser from "./TaskUser";
 
 const MainView = () => {
   return (
-    <main className="container-fluid">
+    <main className="container-fluid" style={{ width: "" }}>
       <NavBar />
       <AppBar />
       <Duration />

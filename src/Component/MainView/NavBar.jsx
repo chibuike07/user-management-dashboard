@@ -5,14 +5,12 @@ import {
   faDotCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { UserContext } from "../../Contexts/Context";
 import { users } from "../util/helpers";
 
 const NavBar = () => {
-  let [params] = useSearchParams();
-  let search = params.get("render");
-
+  const [{ tag }] = useContext(UserContext);
   return (
     <nav
       className="container d-flex justify-content-between"
@@ -20,7 +18,7 @@ const NavBar = () => {
     >
       <div className="d-flex align-items-center p-2">
         <div>
-          <strong>{search ? search : "dashboard"}</strong>
+          <strong className="text-capitalize">{tag ? tag : "dashboard"}</strong>
           <span style={{ opacity: 0.3 }}>{" > "} OSE Banking App</span>
         </div>
       </div>
@@ -42,11 +40,9 @@ const NavBar = () => {
             icon={faDotCircle}
             color="#ff0000"
             size="sm"
-            className="position-absolute"
-            style={{ top: "3%", right: "19%" }}
+            style={{ transform: "translate(-50%, -30%)" }}
           />
         </div>
-        {/* <span style={{ opacity: 0.1 }}>|</span> */}
         <div className="d-flex justify-content-around w-50 align-items-center">
           <FontAwesomeIcon icon={faChrome} className="me-4" size="2x" />
 

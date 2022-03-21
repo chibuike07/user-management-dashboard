@@ -12,7 +12,6 @@ const CreateItem = () => {
           width: "90%",
           height: 70,
           borderRadius: "20px",
-          // bottom: "5%",
         }}
       >
         <div className="p-1">
