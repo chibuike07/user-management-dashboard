@@ -5,12 +5,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Views />} />
+        <Route path="/user-management-dashboard" element={<Views />} />
         <Route
           path="*"
           element={
             <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
+              <p>Wrong path you followed!</p>
             </main>
           }
         />
